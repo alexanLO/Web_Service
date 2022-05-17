@@ -1,12 +1,12 @@
 package com.studiesalexan.webservice.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 @Entity
+@Table(name = "tb_user")
 public class User implements Serializable {
 
     @Id
@@ -16,8 +16,13 @@ public class User implements Serializable {
     private String email;
     private String phone;
     private String password;
+    @OneToMany(mappedBy = "client")
 
+    private List<Order> oders = new ArrayList<>();
     public User(){}
+    public List<Order> getOders() {
+        return oders;
+    }
 
     public User(Long id, String name, String email, String phone, String password) {
         this.id = id;

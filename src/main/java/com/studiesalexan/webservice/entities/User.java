@@ -1,5 +1,7 @@
 package com.studiesalexan.webservice.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -20,6 +22,8 @@ public class User implements Serializable {
 
     private List<Order> oders = new ArrayList<>();
     public User(){}
+    @JsonIgnore //para não dar loop por ser uma associação de mão dupla
+    @OneToMany
     public List<Order> getOders() {
         return oders;
     }

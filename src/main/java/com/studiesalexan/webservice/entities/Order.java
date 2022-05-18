@@ -18,13 +18,13 @@ public class Order {
     private Long id;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
     private Instant moment;
-
     private Integer orderStatus;
     @ManyToOne
     @JoinColumn(name = "client_id")
     private User client;
     @OneToMany(mappedBy = "id.order")
     private Set<OrderItem> items = new HashSet<>();
+
     public Order() {
     }
 
@@ -63,6 +63,10 @@ public class Order {
         return OrderStatus.valueOf(orderStatus);
     }
 
+    public Set<OrderItem> getItems() {
+        return items;
+    }
+
     public void setOrderStatus(OrderStatus orderStatus) {
         if (orderStatus != null) {
             this.orderStatus = orderStatus.getCode();
@@ -77,9 +81,7 @@ public class Order {
         return Objects.equals(id, order.id);
     }
 
-    public Set<OrderItem> getItems(){
-        return items;
-    }
+
     @Override
     public int hashCode() {
         return Objects.hash(id);

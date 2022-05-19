@@ -20,12 +20,12 @@ public class User implements Serializable {
     private String password;
     @OneToMany(mappedBy = "client")
 
-    private List<Order> oders = new ArrayList<>();
+    private List<Order> orders = new ArrayList<>();
     public User(){}
     @JsonIgnore //para não dar loop por ser uma associação de mão dupla
     @OneToMany
-    public List<Order> getOders() {
-        return oders;
+    public List<Order> getOrders() {
+        return orders;
     }
 
     public User(Long id, String name, String email, String phone, String password) {
